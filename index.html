@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang=" en-US">
+<head>
+    <meta charset='utf-8'><meta name="viewport" content="width=device-width,maximum-scale=2">
+    <style>
+        html, input {
+            font-family: Arial, sans-serif;
+            font-size: 30pt;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        div {
+            padding-top: 0.5rem;
+            font-size: 40pt;
+        }
+    </style>
+    <script>
+
+        function input() {
+            return document.getElementById("i");
+        }
+
+        function t() {
+            return input().value;
+        }
+
+        function onchange() {
+            let r = window.m.get(parseInt(t().replaceAll(' ', '')));
+            if (!r) {
+                r = "";
+            }
+            document.getElementById("r").innerText = r;
+        }
+
+        function process() {
+            input().setAttribute("placeholder", "");
+            let m = new Map();
+            for (const [key, value] of Object.entries(window.d)) {
+                for (code of value) {
+                    m.set(code, key);
+                }
+            }
+            window.m = m;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('postkoder.json')
+                .then(r => r.json())
+                .then(d => {
+                    window.d = d;
+                    process();
+                    input().focus();
+                });
+            input().addEventListener('keyup', onchange);
+        });
+    </script>
+
+
+    <title>Postkoder</title>
+</head>
+
+<body>
+
+<h1>Postkoder</h1>
+
+<input id="i" placeholder="laddar...">
+
+<div id="r"></div>
+
+</body>
+</html>
