@@ -36,7 +36,7 @@
         }
 
         function process() {
-            input().setAttribute("placeholder", "");
+            input().setAttribute("placeholder", "tex 19141");
             let m = new Map();
             for (const [key, value] of Object.entries(window.d)) {
                 for (code of value) {
@@ -47,7 +47,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            fetch('postkoder.json')
+            fetch('postnummer.json')
                 .then(r => r.json())
                 .then(d => {
                     window.d = d;
@@ -58,12 +58,12 @@
         });
     </script>
 
-    <title>Postkoder</title>
+    <title>Postnummer</title>
 </head>
 
 <body>
 
-<h1>Postkoder</h1>
+<h1>Postnummer</h1>
 
 <input id="i" placeholder="laddar...">
 
